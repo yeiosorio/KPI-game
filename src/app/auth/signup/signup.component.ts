@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,15 +14,18 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignupComponent {
   signupForm: FormGroup;
-  isLoading = signal(false);
   errorMessage = signal('');
   errorMessages = signal<string[]>([]);
+  
+  // Usar el signal de loading del AuthService
+  isLoading = signal(false);
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
   ) {
+    this.isLoading = this.authService.isLoading;
     this.signupForm = this.fb.group({
       'email': ['', [Validators.required, Validators.email]],
       'nombre-completo': ['', [Validators.required]],
@@ -31,20 +34,19 @@ export class SignupComponent {
     });
   }
 
-
-
   onSubmit(): void {
     if (this.signupForm.valid) {
       this.errorMessage.set('');
       this.errorMessages.set([]);
       
-      const formValue = this.signupForm.value;
-      const email = formValue.email;
-      const nombreCompleto = formValue['nombre-completo'];
-      const codigoCliente = formValue['codigo-de-cliente'];
-      const password = formValue.password;
+      const formData = {
+        email: this.signupForm.value.email,
+        nombreCompleto: this.signupForm.value['nombre-completo'],
+        codigoCliente: this.signupForm.value['codigo-de-cliente'], 
+        password: this.signupForm.value.password
+      };
       
-      this.authService.signup(email, nombreCompleto, codigoCliente, password).subscribe({
+      this.authService.signup(formData).subscribe({
         next: (response) => {
           if (response.ok === 'false') {
             if (response.errors) {
@@ -57,7 +59,6 @@ export class SignupComponent {
               this.errorMessage.set(response.message || 'Error en el registro');
             }
           }
-          // Si ok === 'true', el servicio ya maneja la redirección
         },
         error: (error) => {
           this.errorMessage.set('Error de conexión. Intenta nuevamente.');

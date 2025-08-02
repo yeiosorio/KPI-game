@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,14 +14,18 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  isLoading = signal(false);
   errorMessage = signal('');
+  
+  // Usar el signal de loading del AuthService
+  isLoading = signal(false);
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
   ) {
+    // Inicializar el signal después del constructor
+    this.isLoading = this.authService.isLoading;
     this.loginForm = this.fb.group({
       "codigo-de-cliente": ['', [Validators.required]],
       "password": ['', [Validators.required]],
@@ -34,7 +38,7 @@ export class LoginComponent {
       this.errorMessage.set('');
       const { 'codigo-de-cliente': codigoCliente, password } = this.loginForm.value;
       
-      this.authService.login(codigoCliente, password).subscribe({
+      this.authService.login({ codigoCliente, password }).subscribe({
         next: (response) => {
           if (response.ok === 'false') {
             this.errorMessage.set(response.message || 'Error en el inicio de sesión');
