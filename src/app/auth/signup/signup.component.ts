@@ -61,7 +61,7 @@ export class SignupComponent {
           }
         },
         error: (error) => {
-          this.errorMessage.set('Error de conexión. Intenta nuevamente.');
+          this.errorMessage.set('Error en los datos ingresados.');
           console.error('Signup error:', error);
         }
       });

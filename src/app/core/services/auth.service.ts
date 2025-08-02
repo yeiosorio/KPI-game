@@ -57,7 +57,7 @@ export class AuthService {
         console.error('Login error:', error);
         return of({
           ok: 'false',
-          message: 'Error de conexión. Intenta nuevamente.'
+          message: 'Error en los datos del usuario.'
         } as LoginResponse);
       })
     );
@@ -92,8 +92,8 @@ export class AuthService {
         console.error('Signup error:', error);
         return of({
           ok: 'false',
-          message: 'Error de conexión. Intenta nuevamente.',
-          errors: { 'Conexión': 'Error al conectar con el servidor' }
+          message: 'Error en los datos registrados.',
+          errors: { 'Error': 'en los datos ingresados.' }
         } as SignupResponse);
       })
     );

@@ -9,16 +9,16 @@ export const APP_CONFIG = {
 };
 
 export const API_CONFIG = {
-  BASE_URL: '/api',
+  BASE_URL: '/api/',
   API_KEY: '32e608447ff50d5b6760c335ffe87262',
   CAMPAIGN: '4u'
 };
 
 export const API_ENDPOINTS = {
   auth: {
-    login: '/microsite/sessions/login',
-    signup: '/participants',
-    logout: '/auth/logout',
+    login: 'microsite/sessions/login',
+    signup: 'participants',
+    logout: 'auth/logout',
   }
 };
 

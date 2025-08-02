@@ -43,10 +43,9 @@ export class LoginComponent {
           if (response.ok === 'false') {
             this.errorMessage.set(response.message || 'Error en el inicio de sesión');
           }
-          // Si ok === 'true', el servicio ya maneja la redirección
         },
         error: (error) => {
-          this.errorMessage.set('Error de conexión. Intenta nuevamente.');
+          this.errorMessage.set('Error en los datos del usuario.');
           console.error('Login error:', error);
         }
       });
