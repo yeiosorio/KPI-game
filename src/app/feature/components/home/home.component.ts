@@ -1,6 +1,7 @@
 import { Component, OnInit, signal, inject, ChangeDetectionStrategy, AfterViewInit, ElementRef, ViewChild, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KpiService } from '../../../core/services/kpi.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { KpiData } from '../../../core/interfaces/kpi.interfaces';
 import ApexCharts from 'apexcharts';
 
@@ -15,6 +16,7 @@ import ApexCharts from 'apexcharts';
 export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('chartsContainer', { static: false }) chartsContainer!: ElementRef;
   private kpiService = inject(KpiService);
+  private authService = inject(AuthService);
   
   kpis = signal<KpiData[]>([]);
   isLoading = signal(true);
@@ -190,8 +192,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   logout(): void {
-    // Implementar lógica de logout
-    console.log('Logout clicked');
+    this.authService.logout();
   }
 
   openUserMenu(): void {

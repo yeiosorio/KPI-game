@@ -100,10 +100,29 @@ export class AuthService {
   }
 
   logout(): void {
+    this.isLoading.set(true);
+    
+    // Hacer la llamada al endpoint de logout
+    this.http.post(`${API_CONFIG.BASE_URL}${API_ENDPOINTS.auth.logout}`, {})
+      .pipe(
+        tap(() => {
+          this.clearAuthData();
+        }),
+        catchError(error => {
+          console.error('Logout error:', error);
+          // Limpiar datos localmente aunque falle el endpoint
+          this.clearAuthData();
+          return of(null);
+        })
+      ).subscribe();
+  }
+
+  private clearAuthData(): void {
     localStorage.removeItem(STORAGE_KEYS.TOKEN);
     localStorage.removeItem(STORAGE_KEYS.USER);
     this.isLoggedInSubject.next(false);
     this.currentUser.set(null);
+    this.isLoading.set(false);
     this.router.navigate([ROUTES.LOGIN]);
   }
 

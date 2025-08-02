@@ -2,16 +2,41 @@
 
 Una aplicación Angular moderna para aprender y practicar análisis de KPIs a través de gamificación.
 
+## ✨ Funcionalidades Implementadas
+
+### 🔐 Sistema de Autenticación
+- **Login y Registro**: Formularios reactivos con validación
+- **Gestión de Tokens**: Almacenamiento seguro en localStorage
+- **Guards de Ruta**: Protección de rutas autenticadas
+- **Interceptores HTTP**: Inyección automática de tokens de autorización
+- **Logout Completo**: Limpieza de datos locales y llamada al endpoint de logout
+
+### 📊 Dashboard de KPIs
+- **Visualización de KPIs**: Cards interactivas con métricas clave
+- **Filtros Dinámicos**: Por categoría y búsqueda de texto
+- **Estados de Carga**: Indicadores visuales durante las peticiones
+- **Responsive Design**: Adaptable a diferentes tamaños de pantalla
+- **Logo Corporativo**: Integración de imagen de marca
+
+### 🧪 Testing Unitario
+- **Cobertura de Servicios**: Tests para AuthService y KpiService
+- **Tests de Componentes**: Validación de funcionalidad del HomeComponent
+- **Mocks y Spies**: Simulación de dependencias externas
+- **Casos de Error**: Manejo de errores y estados fallidos
+
 ## 🚀 Tecnologías y Herramientas
 
 - **Angular 19.2.12** - Framework principal
 - **TypeScript** - Lenguaje de programación
 - **SCSS** - Preprocesador CSS
+- **Tailwind CSS** - Framework de utilidades CSS
 - **Standalone Components** - Arquitectura moderna sin NgModules
 - **Angular Signals** - Gestión de estado reactiva
 - **Reactive Forms** - Formularios reactivos
 - **Angular Router** - Navegación y lazy loading
+- **HTTP Client** - Comunicación con APIs REST
 - **Jasmine & Karma** - Testing unitario
+- **RxJS** - Programación reactiva
 
 ## 📁 Estructura del Proyecto
 
@@ -101,12 +126,80 @@ src/app/
 - **Service Testing**: Pruebas de servicios y guards
 - **Form Validation Testing**: Validación de formularios reactivos
 
+## 🚀 Instalación y Configuración
+
+### Prerrequisitos
+- Node.js (versión 18 o superior)
+- npm o yarn
+- Angular CLI (`npm install -g @angular/cli`)
+
+### Instalación
+```bash
+# Clonar el repositorio
+git clone <repository-url>
+cd KPI-game
+
+# Instalar dependencias
+npm install
+
+# Configurar variables de entorno (opcional)
+cp src/environments/environment.example.ts src/environments/environment.ts
+```
+
+### Configuración de API
+Editar `src/app/core/constants/app.constants.ts` para configurar:
+- URL base de la API
+- Endpoints de autenticación
+- Claves de almacenamiento
+
 ## 🔧 Comandos de Desarrollo
 
 ### Servidor de desarrollo
 ```bash
 ng serve
+# La aplicación estará disponible en http://localhost:4200
 ```
+
+### Ejecutar tests
+```bash
+# Tests unitarios
+ng test
+
+# Tests con cobertura
+ng test --code-coverage
+```
+
+### Build de producción
+```bash
+ng build --configuration production
+```
+
+## 📋 Instrucciones de Uso
+
+### 1. Registro de Usuario
+- Navegar a `/signup`
+- Completar el formulario con:
+  - Email válido
+  - Nombre completo
+  - Código de cliente
+  - Contraseña (mínimo 6 caracteres)
+
+### 2. Inicio de Sesión
+- Navegar a `/login`
+- Ingresar código de cliente y contraseña
+- El sistema redirigirá automáticamente al dashboard
+
+### 3. Dashboard de KPIs
+- Visualizar métricas en tiempo real
+- Filtrar por categorías (Ventas, Marketing, Operaciones, etc.)
+- Buscar KPIs específicos usando la barra de búsqueda
+- Hacer logout usando el botón en la barra superior
+
+### 4. Funcionalidades Principales
+- **Filtros**: Seleccionar categoría específica o "Todos"
+- **Búsqueda**: Buscar KPIs por nombre
+- **Responsive**: Funciona en desktop, tablet y móvil
+- **Logout Seguro**: Limpia datos locales y cierra sesión en el servidor
 Navega a `http://localhost:4200/`
 
 ### Build de producción

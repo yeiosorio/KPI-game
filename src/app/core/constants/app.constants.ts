@@ -18,7 +18,7 @@ export const API_ENDPOINTS = {
   auth: {
     login: 'microsite/sessions/login',
     signup: 'participants',
-    logout: 'auth/logout',
+    logout: 'microsite/sessions/logout',
   }
 };
 
