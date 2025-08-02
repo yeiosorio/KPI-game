@@ -1,3 +1,123 @@
+// Animaciones principales
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDelay {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+// Clases de animación
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.animate-fade-in-delay {
+  animation: fadeInDelay 0.8s ease-out 0.3s both;
+}
+
+// Estilos para las tarjetas KPI radiales
+.kpi-card-radial {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideInFromLeft 0.6s ease-out;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.1) 0%,
+      rgba(147, 51, 234, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(59, 130, 246, 0.5) !important;
+    animation: glow 2s infinite;
+    
+    &::before {
+      opacity: 1;
+    }
+  }
+  
+  &:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  &:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  
+  &:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  
+  &:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+}
+
 .kpi-card {
   transition: all 0.3s ease;
   
@@ -28,27 +148,94 @@
   }
 }
 
-@keyframes shimmer {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
+// Contenedor de gráficos
+.chart-container {
+  position: relative;
+  
+  .apexcharts-canvas {
+    animation: float 6s ease-in-out infinite;
   }
 }
 
+.chart-placeholder {
+  transition: all 0.3s ease;
+}
+
+// Efectos de fondo
+.bg-gradient-radial {
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+}
+
+// Estilos para el toolbar
+.toolbar-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+// Efectos de partículas de fondo
+.bg-particles {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+    animation: float 8s ease-in-out infinite;
+  }
+}
+
+// Estilos para badges de estado
 .status-badge {
+  transition: all 0.3s ease;
   animation: fadeIn 0.5s ease-in-out;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
+// Mejoras responsivas
+@media (max-width: 1024px) {
+  .kpi-card-radial {
+    padding: 1.5rem;
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .kpi-card {
+    padding: 1rem;
+  }
+  
+  .kpi-card-radial {
+    padding: 1.25rem;
+    
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+  }
+  
+  .chart-container {
+    .apexcharts-canvas {
+      animation: none; // Desactivar animaciones en móvil para mejor rendimiento
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .kpi-card-radial {
+    padding: 1rem;
   }
 }
 
@@ -61,14 +248,25 @@
   }
 }
 
-// Responsive improvements
-@media (max-width: 768px) {
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+// Mejoras de accesibilidad
+@media (prefers-reduced-motion: reduce) {
+  .kpi-card-radial,
+  .chart-container .apexcharts-canvas,
+  .animate-fade-in,
+  .animate-fade-in-delay {
+    animation: none !important;
+    transition: none !important;
   }
   
-  .kpi-card {
-    padding: 1rem;
+  .kpi-card-radial:hover {
+    transform: none !important;
+  }
+}
+
+// Estilos para modo de alto contraste
+@media (prefers-contrast: high) {
+  .kpi-card-radial {
+    border-width: 2px;
+    border-color: #ffffff !important;
   }
 }
