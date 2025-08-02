@@ -189,12 +189,6 @@ ng build --configuration production
 - Ingresar código de cliente y contraseña
 - El sistema redirigirá automáticamente al dashboard
 
-### 3. Dashboard de KPIs
-- Visualizar métricas en tiempo real
-- Filtrar por categorías (Ventas, Marketing, Operaciones, etc.)
-- Buscar KPIs específicos usando la barra de búsqueda
-- Hacer logout usando el botón en la barra superior
-
 ### 4. Funcionalidades Principales
 - **Filtros**: Seleccionar categoría específica o "Todos"
 - **Búsqueda**: Buscar KPIs por nombre

@@ -9,7 +9,7 @@
       <div class="flex justify-between items-center h-16">
         <!-- Logo/Title -->
         <div class="flex items-center space-x-3">
-          <img src="/assets/logo-primario (1).png" alt="Logo" class="w-8 h-8 object-contain">
+          <img src="/assets/logo-primario (1).png" alt="Logo" class="w-10 h-10 object-contain">
           <h1 class="text-xl font-bold text-white">KPI Dashboard</h1>
         </div>
         
@@ -113,48 +113,7 @@
     @if (!isLoading() && !error() && filteredKpis().length > 0) {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" #chartsContainer>
         @for (kpi of filteredKpis(); track kpi.name + kpi.unidad; let i = $index) {
-          <div class="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 transform hover:scale-105 kpi-card-radial">
-            <!-- Chart Container -->
-            <div class="flex flex-col items-center space-y-6">
-              <!-- Chart will be inserted here by ApexCharts -->
-              <div class="chart-placeholder w-48 h-48 flex items-center justify-center" [attr.data-chart-index]="i">
-                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-              </div>
-              
-              <!-- KPI Info -->
-              <div class="text-center space-y-3">
-                <h3 class="text-lg font-bold text-white truncate max-w-full">
-                  {{ kpi.name }}
-                </h3>
-                
-                <!-- Metrics -->
-                <div class="space-y-2">
-                  <div class="flex justify-between items-center text-sm">
-                    <span class="text-gray-400">Actual:</span>
-                    <span class="text-white font-semibold">
-                      {{ kpi.avanceActual | number:'1.0-2' }} {{ kpi.unidad }}
-                    </span>
-                  </div>
-                  <div class="flex justify-between items-center text-sm">
-                    <span class="text-gray-400">Meta:</span>
-                    <span class="text-gray-300">
-                      {{ kpi.metaMes | number:'1.0-2' }} {{ kpi.unidad }}
-                    </span>
-                  </div>
-                </div>
-                
-                <!-- Percentage Display -->
-                <div class="text-center">
-                  <span class="text-2xl font-bold text-white">{{ kpi.porcentaje | number:'1.0-1' }}%</span>
-                </div>
-                
-                <!-- Status Badge -->
-                <div [class]="'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ' + getBadgeClass(kpi.porcentaje)">
-                  {{ getStatusText(kpi.porcentaje) }}
-                </div>
-              </div>
-            </div>
-          </div>
+          <app-kpi-card [kpi]="kpi" [chartIndex]="i"></app-kpi-card>
         }
       </div>
     }

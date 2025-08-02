@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { KpiService } from '../../../core/services/kpi.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { KpiData } from '../../../core/interfaces/kpi.interfaces';
+import { KpiCardComponent } from '../../../shared';
 import ApexCharts from 'apexcharts';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, KpiCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -200,19 +201,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     console.log('User menu clicked');
   }
 
-  getStatusText(percentage: number): string {
-    if (percentage >= 90) return 'Excelente';
-    if (percentage >= 70) return 'Bueno';
-    if (percentage >= 50) return 'Regular';
-    return 'Necesita Atención';
-  }
 
-  getBadgeClass(percentage: number): string {
-    if (percentage >= 90) return 'bg-green-500/20 text-green-300 border border-green-500/30';
-    if (percentage >= 70) return 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30';
-    if (percentage >= 50) return 'bg-orange-500/20 text-orange-300 border border-orange-500/30';
-    return 'bg-red-500/20 text-red-300 border border-red-500/30';
-  }
 
   // Métodos para el filtro
   setFilter(filter: 'todos' | 'cartones' | 'hectolitros'): void {
