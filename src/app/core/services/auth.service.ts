@@ -84,7 +84,7 @@ export class AuthService {
       tap(response => {
         this.isLoading.set(false);
         if (response.ok === 'true') {
-          this.router.navigate([ROUTES.HOME]);
+          this.router.navigate([ROUTES.LOGIN]);
         }
       }),
       catchError(error => {
