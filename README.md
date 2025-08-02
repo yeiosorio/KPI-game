@@ -1,59 +1,150 @@
-# KPIGame
+# KPI Game
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+Una aplicación Angular moderna para aprender y practicar análisis de KPIs a través de gamificación.
 
-## Development server
+## 🚀 Tecnologías y Herramientas
 
-To start a local development server, run:
+- **Angular 19.2.12** - Framework principal
+- **TypeScript** - Lenguaje de programación
+- **SCSS** - Preprocesador CSS
+- **Standalone Components** - Arquitectura moderna sin NgModules
+- **Angular Signals** - Gestión de estado reactiva
+- **Reactive Forms** - Formularios reactivos
+- **Angular Router** - Navegación y lazy loading
+- **Jasmine & Karma** - Testing unitario
 
+## 📁 Estructura del Proyecto
+
+```
+src/app/
+├── core/
+│   ├── constants/           # Constantes globales y configuración
+│   │   └── app.constants.ts
+│   ├── guards/
+│   │   └── auth.guard.ts    # Guard de autenticación
+│   ├── interceptors/        # Interceptores HTTP
+│   │   └── auth.interceptor.ts # Interceptor de autenticación
+│   └── services/
+│       └── api.service.ts   # Servicio base para APIs
+├── shared/                  # Componentes y utilidades compartidas
+│   └── index.ts
+├── auth/
+│   ├── login/              # Componente de inicio de sesión
+│   │   ├── login.component.ts
+│   │   ├── login.component.html
+│   │   ├── login.component.scss
+│   │   └── login.component.spec.ts
+│   └── signup/             # Componente de registro
+│       ├── signup.component.ts
+│       ├── signup.component.html
+│       ├── signup.component.scss
+│       └── signup.component.spec.ts
+├── feature/                # Funcionalidades principales
+│   └── home/               # Página principal con listado de KPIs
+│       ├── home.component.ts
+│       ├── home.component.html
+│       ├── home.component.scss
+│       └── home.component.spec.ts
+├── app.component.ts
+├── app.config.ts
+└── app.routes.ts
+
+## 🏗️ Patrones de Diseño y Arquitectura
+
+### Standalone Components
+- **Sin NgModules**: Uso exclusivo de standalone components
+- **Lazy Loading**: Carga diferida de componentes por rutas
+- **Tree Shaking**: Optimización automática del bundle
+
+### Gestión de Estado
+- **Angular Signals**: Estado reactivo y eficiente
+- **Computed Values**: Valores derivados automáticos
+- **OnPush Strategy**: Detección de cambios optimizada
+
+### Formularios Reactivos
+- **FormBuilder**: Construcción declarativa de formularios
+- **Validators**: Validación robusta y personalizada
+- **Error Handling**: Manejo centralizado de errores
+
+### Arquitectura de Servicios
+- **Dependency Injection**: Inyección de dependencias moderna con `inject()`
+- **Singleton Services**: Servicios globales con `providedIn: 'root'`
+- **HTTP Interceptors**: Manejo centralizado de requests
+
+## 🛡️ Seguridad y Guards
+
+- **Auth Guard**: Protección de rutas autenticadas
+- **HTTP Interceptor**: Inyección automática de tokens
+- **Route Protection**: Control de acceso basado en autenticación
+
+## 🎨 Características de UI/UX
+
+- **Responsive Design**: Adaptable a todos los dispositivos
+- **Modern CSS**: Gradientes, sombras y animaciones
+- **Accessibility**: Formularios accesibles y semánticos
+- **Loading States**: Estados de carga y feedback visual
+- **Error Handling**: Mensajes de error claros y útiles
+
+## 🚦 Rutas Configuradas
+
+- `/` → Redirección a `/home`
+- `/home` → Página principal (pública)
+- `/login` → Inicio de sesión
+- `/signup` → Registro de usuario
+- `/dashboard` → Panel principal (protegido por auth guard)
+- `/**` → Redirección a `/home` (404 handling)
+
+## 🧪 Testing
+
+- **Unit Tests**: Pruebas unitarias para todos los componentes
+- **Component Testing**: Testing de interacciones y estados
+- **Service Testing**: Pruebas de servicios y guards
+- **Form Validation Testing**: Validación de formularios reactivos
+
+## 🔧 Comandos de Desarrollo
+
+### Servidor de desarrollo
 ```bash
 ng serve
 ```
+Navega a `http://localhost:4200/`
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
+### Build de producción
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+### Ejecutar tests
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
+### Linting
 ```bash
-ng e2e
+ng lint
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📦 Dependencias Principales
 
-## Additional Resources
+- `@angular/core` - Framework principal
+- `@angular/common` - Módulos comunes
+- `@angular/forms` - Formularios reactivos
+- `@angular/router` - Sistema de rutas
+- `rxjs` - Programación reactiva
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🔮 Próximas Características
+
+- [ ] Implementación de servicios de autenticación
+- [ ] Dashboard con KPIs interactivos
+- [ ] Sistema de gamificación y puntos
+- [ ] Componentes compartidos en `/shared`
+- [ ] Internacionalización (i18n)
+- [ ] PWA capabilities
+- [ ] Tests E2E con Cypress
+
+## 📚 Recursos Adicionales
+
+- [Angular Documentation](https://angular.dev)
+- [Angular CLI Reference](https://angular.dev/tools/cli)
+- [Angular Signals Guide](https://angular.dev/guide/signals)
+- [Standalone Components](https://angular.dev/guide/components/importing)
